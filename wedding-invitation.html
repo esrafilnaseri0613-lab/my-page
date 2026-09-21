@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>دعوت‌نامه ازدواج</title>
+<meta name="theme-color" content="#f5f1e8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Vazirmatn:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
+
+<!-- ╔══════════════════════════════════════════════════════════════════╗
+     ║  تنظیمات دعوت‌نامه — فقط همین بخش را ویرایش کنید                 ║
+     ║  هر چیزی که داخل "  " است متن قابل تغییر است                     ║
+     ╚══════════════════════════════════════════════════════════════════╝ -->
+<script>
+window.INVITE = {
+
+  /* ───── ۱. نام‌ها ───── */
+  groom: "حسام",                 // نام داماد
+  bride: "انا",                  // نام عروس
+  firstName: "groom",           // کدام نام اول نوشته شود؟  "groom" یا "bride"
+  seal: "H & A",                // حروف روی مهر پاکت (انگلیسی)
+  latinTitle: "The Wedding of", // خط انگلیسی بالای نام‌ها (اگر نمی‌خواهید: "")
+
+  /* ───── ۲. متن‌ها ───── */
+  heroLine: "با عشق، شما را به جشن ازدواجمان دعوت می‌کنیم",
+
+  // متن اصلی شما اینجا. برای رفتن به خط بعد از \n استفاده کنید.
+  message:
+    "عشق یعنی کنار هم بودن، حتی وقتی دنیا شلوغ است.\n" +
+    "ما تصمیم گرفتیم این مسیر را با هم ادامه بدهیم\n" +
+    "و دوست داریم در این روز خاص، شما هم کنارمان باشید.",
+  messageSign: "حسام و انا",
+
+  closing: "منتظر دیدن شما هستیم",
+
+  /* ───── ۳. زمان ───── */
+  // تاریخ میلادی برای شمارش معکوس و تقویم. بعد از + ساعت منطقه‌ی زمانی است (باکو +04:00 ، تهران +03:30)
+  dateISO: "2026-10-30T18:00:00+04:00",
+  durationHours: 5,
+  dateParts: { weekday: "جمعه", day: "۸", month: "آبان", year: "۱۴۰۵", time: "ساعت ۱۸:۰۰" },
+
+  /* ───── ۴. برنامه‌ی شب (اگر نمی‌خواهید: schedule: []) ───── */
+  scheduleTitle: "برنامه‌ی شب",
+  schedule: [
+    { time: "۱۸:۰۰", title: "ورود مهمانان و پذیرایی" },
+    { time: "۱۹:۰۰", title: "مراسم عقد" },
+    { time: "۲۰:۳۰", title: "شام" },
+    { time: "۲۲:۰۰", title: "رقص و شادی" }
+  ],
+
+  /* ───── ۵. مکان ───── */
+  venue: {
+    name: "نام تالار",
+    address: "باکو، خیابان نمونه، شماره ۱۲\nآدرس دقیق تالار را اینجا بنویسید",
+    // چند دکمه‌ی مسیریابی می‌توانید بگذارید. لینک نقشه را از Google Maps / نشان / بلد کپی کنید.
+    mapLinks: [
+      { label: "مسیریابی با Google Maps", url: "https://www.google.com/maps/search/?api=1&query=Baku" }
+      // ,{ label: "مسیریابی با نشان", url: "https://nshn.ir/..." }
+    ]
+  },
+
+  /* ───── ۶. تماس و تأیید حضور (لینکِ خالی = دکمه نمایش داده نمی‌شود) ───── */
+  contactTitle: "حضورتان را به ما خبر بدهید",
+  contacts: [
+    { label: "واتساپ",  url: "https://wa.me/994500000000" },
+    { label: "تماس",    url: "tel:+994500000000" },
+    { label: "تلگرام",  url: "" }
+  ],
+
+  /* ───── ۷. موسیقی ─────
+     src خالی = موسیقی آرام و ملایمِ داخلی پخش می‌شود.
+     برای آهنگ خودتان، لینک مستقیم فایل mp3 را بگذارید. */
+  music: { src: "", volume: 0.5 },
+
+  /* ───── ۸. آواتارها ─────
+     خالی = نقاشی پیش‌فرض. برای عکس/تصویر خودتان لینک یا data-URI تصویر (PNG شفاف) را بگذارید. */
+  avatars: { groom: "", bride: "" }
+};
+</script>
+
+<style>
+:root{
+  --paper:#f5f1e8; --paper-2:#faf7f0; --desk:#e2dac8;
+  --ink:#1a1917; --ink-2:#4b4740; --mist:#8f897d; --hair:#d6cebd;
+  --fa:'Vazirmatn','Tahoma',sans-serif;
+  --script:'Aref Ruqaa','Vazirmatn',serif;
+  --latin:'Cormorant Garamond',Georgia,serif;
+  --strip:190px;
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .25 0 0 0 0 .22 0 0 0 0 .18 .35 0 0 0 -.08'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+*,*::before,*::after{box-sizing:inherit;margin:0;padding:0}
+body{
+  background:var(--paper) var(--grain);
+  color:var(--ink);
+  font-family:var(--fa);font-weight:300;line-height:1.9;
+  overflow-x:clip;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
+/* ───────── music button ───────── */
+.music{
+  position:fixed;z-index:60;
+  top:calc(14px + env(safe-area-inset-top,0px));left:14px;
+  width:42px;height:42px;border-radius:50%;
+  border:1px solid var(--hair);background:rgba(250,247,240,.86);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  display:grid;place-items:center;cursor:pointer;color:var(--ink);
+}
+.music.attn::after{content:"";position:absolute;inset:-1px;border-radius:50%;border:1px solid var(--ink-2);animation:ring 2.2s ease-out infinite}
+@keyframes ring{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.7);opacity:0}}
+.eq{display:flex;align-items:flex-end;gap:3px;height:14px}
+.eq i{display:block;width:2px;height:4px;background:currentColor;border-radius:1px;transition:height .3s}
+.music[aria-pressed="true"] .eq i{animation:eq 1s ease-in-out infinite alternate}
+.music[aria-pressed="true"] .eq i:nth-child(2){animation-delay:-.35s}
+.music[aria-pressed="true"] .eq i:nth-child(3){animation-delay:-.7s}
+@keyframes eq{0%{height:3px}100%{height:14px}}
+
+/* ───────── intro : envelope ───────── */
+#intro{position:relative;height:340vh}
+.stage{
+  position:sticky;top:0;height:100vh;height:100dvh;overflow:hidden;z-index:2;
+  background:radial-gradient(120% 90% at 50% 38%,#ece5d6 0%,var(--desk) 100%);
+  --W:min(84vw,380px);--H:calc(var(--W) * .68);
+}
+.paperfade{position:absolute;inset:0;background:var(--paper) var(--grain);opacity:0;z-index:0}
+.guest{
+  position:absolute;left:0;right:0;z-index:5;text-align:center;
+  top:calc(50% - var(--H) / 2 - 78px);
+  font-size:14px;color:var(--ink-2);padding:0 24px;
+}
+.guest b{font-weight:500;font-family:var(--script);font-size:22px;display:block;color:var(--ink)}
+.env{position:absolute;left:50%;top:50%;width:var(--W);height:var(--H);margin-left:calc(var(--W) / -2);margin-top:calc(var(--H) / -2)}
+.env-back{
+  position:absolute;inset:0;z-index:1;
+  background:
+    repeating-linear-gradient(135deg,rgba(255,255,255,.035) 0 1px,transparent 1px 7px),
+    #24231f;
+  box-shadow:0 34px 60px -26px rgba(45,32,10,.45),0 2px 6px rgba(45,32,10,.18);
+  border-radius:2px;
+}
+.env-front{position:absolute;inset:0;z-index:3}
+.env-front svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.env-label{
+  position:absolute;left:0;right:0;bottom:11%;text-align:center;
+  font-family:var(--script);font-size:calc(var(--W) * .07);color:var(--ink-2);line-height:1.4;
+}
+.flap{
+  position:absolute;left:0;top:0;width:100%;height:58.6%;z-index:4;
+  transform-origin:50% 0;transform-style:preserve-3d;will-change:transform;
+}
+.flap-f,.flap-b{position:absolute;inset:0;width:100%;height:100%;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.flap-b{
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  background:repeating-linear-gradient(135deg,rgba(255,255,255,.035) 0 1px,transparent 1px 7px),#2b2a26;
+  transform:rotateY(180deg);
+}
+.seal{
+  position:absolute;left:50%;top:100%;
+  width:calc(var(--W) * .19);height:calc(var(--W) * .19);
+  margin:calc(var(--W) * -.095) 0 0 calc(var(--W) * -.095);
+  border-radius:50%;
+  background:radial-gradient(circle at 34% 28%,#55524d 0%,#1d1c1a 58%,#0f0e0d 100%);
+  box-shadow:0 6px 14px rgba(0,0,0,.35),inset 0 0 0 3px rgba(255,255,255,.06),inset 0 0 0 5px rgba(0,0,0,.35);
+  display:grid;place-items:center;color:#e9e3d6;
+  font-family:var(--latin);font-style:italic;font-size:calc(var(--W) * .052);letter-spacing:.02em;direction:ltr;
+  -webkit-backface-visibility:hidden;backface-visibility:hidden;
+}
+.card{
+  position:absolute;left:50%;top:50%;z-index:2;
+  width:calc(var(--W) * .88);height:calc(var(--H) * .78);
+  margin-left:calc(var(--W) * -.44);margin-top:calc(var(--H) * -.39);
+  background:var(--paper-2) var(--grain);
+  box-shadow:0 12px 28px -12px rgba(0,0,0,.35);
+  will-change:transform,opacity;
+}
+.card::before{content:"";position:absolute;inset:7px;border:1px solid var(--hair)}
+.card-in{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:2px}
+.card-in .c1{font-size:calc(var(--W) * .034);color:var(--mist)}
+.card-in .c2{font-family:var(--script);font-size:calc(var(--W) * .085);line-height:1.5}
+.card-in .c3{font-size:calc(var(--W) * .034);color:var(--ink-2)}
+.hint{
+  position:absolute;left:0;right:0;z-index:5;text-align:center;
+  top:calc(50% + var(--H) / 2 + 40px);
+  font-size:13px;color:var(--ink-2);background:none;border:0;font-family:inherit;cursor:pointer;
+}
+.hint span{display:block;margin:10px auto 0;width:1px;height:34px;background:linear-gradient(var(--ink),transparent);transform-origin:top;animation:cue 1.8s ease-in-out infinite}
+@keyframes cue{0%{transform:scaleY(0);opacity:1}60%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);opacity:0}}
+
+/* hero (last frame of intro) */
+.hero{
+  position:absolute;inset:0;z-index:6;opacity:0;pointer-events:none;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  padding:calc(16vh) 24px calc(var(--strip) + 3vh);
+}
+.garland{position:absolute;top:0;left:50%;width:min(620px,110vw);transform:translateX(-50%);height:auto;pointer-events:none}
+.garland path{stroke:var(--ink-2);stroke-width:.85;stroke-linecap:round;stroke-linejoin:round}
+.hero-in{position:relative}
+.latin{font-family:var(--latin);font-style:italic;font-weight:300;font-size:19px;color:var(--ink-2);direction:ltr;letter-spacing:.02em}
+.names{
+  font-family:var(--script);font-weight:400;
+  font-size:clamp(50px,15vw,84px);line-height:1.55;margin:2px 0 0;
+  display:flex;align-items:baseline;justify-content:center;gap:.28em;flex-wrap:wrap;
+}
+.names .amp{font-family:var(--fa);font-weight:200;font-size:.42em;color:var(--mist)}
+.hero-date{font-size:16px;color:var(--ink);margin-top:6px;font-weight:400}
+.hero-sub{font-size:14.5px;color:var(--ink-2);margin:10px auto 0;max-width:20em}
+
+/* ───────── story ───────── */
+main{position:relative;max-width:560px;margin:0 auto}
+.scene{
+  min-height:100vh;min-height:100svh;
+  padding:12vh 30px calc(var(--strip) + 9vh);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+}
+.reveal{opacity:0;transition:opacity 1.1s ease}
+.reveal.in{opacity:1}
+.sprig{width:112px;height:26px;margin-bottom:26px;overflow:visible}
+.sprig path{fill:none;stroke:var(--ink-2);stroke-width:.9;stroke-linecap:round;stroke-linejoin:round}
+.h2{font-family:var(--script);font-weight:400;font-size:34px;line-height:1.6;margin-bottom:8px}
+
+/* message frame */
+.frame{position:relative;padding:54px 30px 42px;width:100%}
+.frame::before{content:"";position:absolute;inset:0;border:1px solid var(--ink-2)}
+.frame::after{content:"";position:absolute;inset:6px;border:1px solid var(--hair)}
+.frame .corner{position:absolute;width:38px;height:38px;fill:none;stroke:var(--ink);stroke-width:1;stroke-linecap:round;z-index:1;background:var(--paper)}
+.corner.tl{top:-1px;left:-1px}
+.corner.tr{top:-1px;right:-1px;transform:scaleX(-1)}
+.corner.bl{bottom:-1px;left:-1px;transform:scaleY(-1)}
+.corner.br{bottom:-1px;right:-1px;transform:scale(-1,-1)}
+.msg{font-size:17.5px;line-height:2.25;color:var(--ink);font-weight:300;position:relative;z-index:2}
+.sign{font-family:var(--script);font-size:30px;margin-top:22px;line-height:1.5;position:relative;z-index:2}
+
+/* date */
+.wd{font-size:16px;color:var(--ink-2);font-weight:400}
+.day{font-weight:200;font-size:clamp(110px,34vw,168px);line-height:1;margin:2px 0 -4px}
+.mon{font-family:var(--script);font-size:46px;line-height:1.5}
+.yr{font-size:16px;color:var(--mist);font-weight:300}
+.tm{font-size:17px;margin-top:14px;font-weight:400}
+.cd{display:flex;justify-content:center;margin:34px 0 8px;direction:rtl}
+.cd div{padding:0 15px;position:relative}
+.cd div+div::before{content:"";position:absolute;right:0;top:12%;bottom:12%;width:1px;background:var(--hair)}
+.cd b{display:block;font-size:30px;font-weight:200;line-height:1.3;min-width:2ch}
+.cd small{font-size:12px;color:var(--mist)}
+.cd-note{font-size:13px;color:var(--mist);margin-bottom:26px}
+
+/* buttons */
+.btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:8px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 26px;
+  border:1px solid var(--ink);border-radius:999px;color:var(--ink);text-decoration:none;
+  font-size:15px;font-weight:400;background:transparent;font-family:inherit;cursor:pointer;
+  transition:background .25s,color .25s;
+}
+.btn:hover,.btn:focus-visible{background:var(--ink);color:var(--paper)}
+.btn.solid{background:var(--ink);color:var(--paper)}
+.btn.solid:hover{background:transparent;color:var(--ink)}
+
+/* schedule */
+.tl{list-style:none;width:100%;max-width:340px;margin-top:22px}
+.tl li{display:grid;grid-template-columns:64px 20px 1fr;align-items:start;text-align:right;min-height:64px}
+.tl .t{font-weight:400;font-size:16px;padding-top:0}
+.tl .dot{position:relative;height:100%}
+.tl .dot::before{content:"";position:absolute;top:13px;bottom:-13px;right:9px;width:1px;background:var(--hair)}
+.tl li:last-child .dot::before{display:none}
+.tl .dot::after{content:"";position:absolute;top:9px;right:5px;width:9px;height:9px;border-radius:50%;background:var(--paper);border:1px solid var(--ink)}
+.tl .d{font-size:16px;color:var(--ink-2);padding-right:6px}
+
+/* place */
+.pin{width:46px;height:58px;overflow:visible;margin-bottom:12px}
+.pin .p{fill:none;stroke:var(--ink);stroke-width:1.1;stroke-linejoin:round}
+.pin .r{fill:none;stroke:var(--ink-2);stroke-width:.7;transform-origin:24px 58px;animation:ripple 2.8s ease-out infinite}
+.pin .r:nth-of-type(2){animation-delay:1.4s}
+@keyframes ripple{0%{transform:scale(.3);opacity:.9}100%{transform:scale(1.7);opacity:0}}
+.venue{font-family:var(--script);font-size:38px;line-height:1.5;font-weight:400}
+.addr{font-size:16px;color:var(--ink-2);margin:6px 0 22px}
+.lead{font-size:16px;color:var(--ink-2);margin:4px 0 20px}
+
+.closing{font-family:var(--script);font-size:clamp(34px,10vw,46px);line-height:1.6}
+.names2{font-size:16px;color:var(--ink-2);margin-top:6px}
+.finale-garland{width:min(520px,100%);height:auto;margin:-12vh 0 4vh}
+.finale-garland path{stroke:var(--ink-2);stroke-width:.85;stroke-linecap:round;stroke-linejoin:round}
+.scene.last{padding-bottom:calc(var(--strip) + 16vh)}
+
+/* ───────── walking couple ───────── */
+.walk{
+  position:fixed;left:0;right:0;bottom:0;z-index:30;pointer-events:none;opacity:0;direction:ltr;
+  height:calc(var(--strip) + env(safe-area-inset-bottom,0px));
+  background:linear-gradient(to top,var(--paper) 0,var(--paper) 60%,rgba(245,241,232,0) 100%);
+}
+.track{position:absolute;left:0;right:0;margin:0 auto;width:min(100%,760px);height:176px;bottom:calc(env(safe-area-inset-bottom,0px) + 10px)}
+.track::after{content:"";position:absolute;left:4%;right:4%;bottom:-3px;height:1px;background:linear-gradient(90deg,transparent,var(--hair) 18%,var(--hair) 82%,transparent)}
+.fig{position:absolute;bottom:0;left:0;width:66px;height:170px;will-change:transform}
+.fig-in{width:100%;height:100%;transform-origin:50% 100%}
+.fig svg,.fig img{display:block;width:100%;height:100%;object-fit:contain;object-position:bottom}
+.is-walking .fig.g .fig-in{animation:bobA .44s ease-in-out infinite alternate}
+.is-walking .fig.b .fig-in{animation:bobB .44s ease-in-out infinite alternate}
+@keyframes bobA{from{transform:translateY(0) rotate(-1deg)}to{transform:translateY(-4px) rotate(1deg)}}
+@keyframes bobB{from{transform:translateY(-4px) rotate(1deg)}to{transform:translateY(0) rotate(-1deg)}}
+.heart{position:absolute;left:50%;bottom:172px;width:30px;height:30px;margin-left:-15px;opacity:0;overflow:visible}
+.heart path.h{fill:none;stroke:var(--ink);stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1}
+.spark{position:absolute;bottom:186px;width:12px;height:12px;fill:var(--ink);opacity:0}
+.together .spark{animation:tw 2.4s ease-in-out infinite}
+.spark.s1{left:calc(50% - 40px)}.spark.s2{left:calc(50% + 28px);bottom:198px;animation-delay:.8s!important}.spark.s3{left:calc(50% + 4px);bottom:214px;animation-delay:1.5s!important}
+@keyframes tw{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:.85;transform:scale(1)}}
+
+@media (min-width:700px){
+  :root{--strip:210px}
+  .fig{width:76px;height:196px}.track{height:200px}.heart{bottom:196px}
+  .spark{bottom:210px}
+}
+@media (prefers-reduced-motion:reduce){
+  .music.attn::after,.hint span,.pin .r,.is-walking .fig .fig-in,.together .spark,.music[aria-pressed="true"] .eq i{animation:none!important}
+  .reveal{transition:none}
+}
+</style>
+</head>
+<body>
+
+<button class="music attn" id="music" type="button" aria-label="پخش یا توقف موسیقی" aria-pressed="false" title="موسیقی">
+  <span class="eq"><i></i><i></i><i></i></span>
+</button>
+
+<!-- ═════════ پاکت ═════════ -->
+<section id="intro" aria-label="پاکت دعوت‌نامه">
+  <div class="stage" id="stage">
+    <div class="paperfade" id="paperfade"></div>
+    <div class="guest" id="guest"></div>
+
+    <div class="env" id="env">
+      <div class="env-back" id="envBack"></div>
+
+      <div class="flap" id="flap">
+        <div class="flap-b"></div>
+        <svg class="flap-f" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <defs><linearGradient id="fg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4efe4"/><stop offset="1" stop-color="#e9e2d2"/></linearGradient></defs>
+          <polygon points="0,0 100,0 50,100" fill="url(#fg)" stroke="#c9c0ac" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+        </svg>
+        <div class="seal" id="seal"></div>
+      </div>
+
+      <div class="env-front" id="envFront">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <defs><linearGradient id="pg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3eee2"/><stop offset="1" stop-color="#ebe4d4"/></linearGradient></defs>
+          <polygon points="0,0 50,58.6 100,0 100,100 0,100" fill="url(#pg)"/>
+          <polyline points="0,100 50,55 100,100" fill="none" stroke="#d3cab6" stroke-width="1" vector-effect="non-scaling-stroke"/>
+          <polyline points="0,0 50,58.6 100,0" fill="none" stroke="#c9c0ac" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          <rect x="0" y="0" width="100" height="100" fill="none" stroke="#cfc6b2" stroke-width="1" vector-effect="non-scaling-stroke"/>
+        </svg>
+        <div class="env-label" id="envLabel"></div>
+      </div>
+    </div>
+
+    <div class="card" id="card">
+      <div class="card-in" id="cardIn">
+        <span class="c1">دعوت‌نامه ازدواج</span>
+        <span class="c2" id="cardNames"></span>
+        <span class="c3" id="cardDate"></span>
+      </div>
+    </div>
+
+    <button class="hint" id="hint" type="button">برای باز کردن پاکت اسکرول کنید یا لمس کنید<span></span></button>
+
+    <div class="hero" id="hero">
+      <div class="garland-wrap" id="garlandTop"></div>
+      <div class="hero-in">
+        <p class="latin" id="latin"></p>
+        <h1 class="names" id="names"></h1>
+        <p class="hero-date" id="heroDate"></p>
+        <p class="hero-sub" id="heroLine"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ داستان ═════════ -->
+<main id="story"></main>
+
+<!-- ═════════ زوج در حال قدم زدن ═════════ -->
+<div class="walk" id="walk" aria-hidden="true">
+  <div class="track" id="track">
+    <div class="fig g" id="figG"><div class="fig-in"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 310">
+<defs>
+<linearGradient id="gJ" x1="0" x2="1"><stop offset="0" stop-color="#302f2c"/><stop offset=".5" stop-color="#171615"/><stop offset="1" stop-color="#2b2a28"/></linearGradient>
+<linearGradient id="gA" x1="0" x2="1"><stop offset="0" stop-color="#262523"/><stop offset="1" stop-color="#1c1b19"/></linearGradient>
+<linearGradient id="gP" x1="0" x2="1"><stop offset="0" stop-color="#1e1d1b"/><stop offset=".5" stop-color="#121110"/><stop offset="1" stop-color="#1e1d1b"/></linearGradient>
+<linearGradient id="gSh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a4844"/><stop offset=".45" stop-color="#0e0e0d"/></linearGradient>
+<radialGradient id="gSk" cx=".45" cy=".4" r=".7"><stop offset="0" stop-color="#f4e3d3"/><stop offset="1" stop-color="#e2c7b0"/></radialGradient>
+</defs>
+<ellipse cx="60" cy="304" rx="34" ry="3.6" fill="#1a1917" opacity=".12"/>
+<!-- trousers -->
+<path d="M40 160 C39 205 41 252 42.5 293 L58.5 293 C58.6 250 59.2 208 60 176 C60.8 208 61.4 250 61.5 293 L77.5 293 C79 252 81 205 80 160Z" fill="url(#gP)" stroke="#050505" stroke-width=".8" stroke-linejoin="round"/>
+<path d="M50 176 L50.5 291 M70 176 L69.5 291" stroke="#3b3a37" stroke-width=".6" fill="none"/>
+<path d="M39 292 L58.6 292 C59.6 297.5 58 303 51.5 303.4 L41.5 303.4 C36.5 303.2 35.8 297.5 39 292Z" fill="url(#gSh)"/>
+<path d="M61.4 292 L81 292 C84.2 297.5 83.5 303.2 78.5 303.4 L68.5 303.4 C62 303 60.4 297.5 61.4 292Z" fill="url(#gSh)"/>
+<path d="M43 297 Q49 294.6 56 296.4 M64 296.4 Q71 294.6 77 297" stroke="#7a7873" stroke-width=".6" fill="none" stroke-linecap="round"/>
+<!-- neck -->
+<path d="M53 48 L53 63 C56 68 64 68 67 63 L67 48Z" fill="#e0c5ae"/>
+<!-- jacket torso (waist taper) -->
+<path d="M50 60 C41 62 38 66 39 77 C40 100 40 124 36 166 L84 166 C80 124 80 100 81 77 C82 66 79 62 70 60 L60 72Z" fill="url(#gJ)" stroke="#050505" stroke-width=".9" stroke-linejoin="round"/>
+<!-- vest -->
+<path d="M52 88 L60 98 L68 88 L71 142 L60 152 L49 142Z" fill="#33322f" stroke="#050505" stroke-width=".6" stroke-linejoin="round"/>
+<circle cx="60" cy="112" r="1.3" fill="#0d0d0c"/><circle cx="60" cy="126" r="1.3" fill="#0d0d0c"/><circle cx="60" cy="140" r="1.3" fill="#0d0d0c"/>
+<!-- shirt -->
+<path d="M51 60 L60 73 L69 60 L67 68 L60 96 L53 68Z" fill="#fbfaf6" stroke="#2a2a28" stroke-width=".6" stroke-linejoin="round"/>
+<path d="M51 60 L55 66 L60 62 L65 66 L69 60 L60 73Z" fill="#f2f0ea" stroke="#2a2a28" stroke-width=".5" stroke-linejoin="round"/>
+<!-- tie -->
+<path d="M56.6 66 L63.4 66 L62.2 73 L57.8 73Z" fill="#0b0b0a"/>
+<path d="M57.8 73 L62.2 73 L64.6 114 L60 122 L55.4 114Z" fill="#0b0b0a" stroke="#000" stroke-width=".5"/>
+<path d="M59 76 L59.6 112" stroke="#3e3d3a" stroke-width=".6"/>
+<!-- lapels -->
+<path d="M50 60 L44 84 L55 113 L58 108 L55.5 88 L55 66Z" fill="#262523" stroke="#050505" stroke-width=".7" stroke-linejoin="round"/>
+<path d="M70 60 L76 84 L65 113 L62 108 L64.5 88 L65 66Z" fill="#262523" stroke="#050505" stroke-width=".7" stroke-linejoin="round"/>
+<!-- pocket square -->
+<path d="M70 98 L79 95.5 L79.6 100 L71 102Z" fill="#fff" stroke="#2a2a28" stroke-width=".5" stroke-linejoin="round"/>
+<!-- left arm (hanging) -->
+<path d="M39 68 C31 68 28 72 27 80 C25 104 24 138 24.5 160 L34 161 C34 138 36 108 40 80Z" fill="url(#gA)" stroke="#050505" stroke-width=".9" stroke-linejoin="round"/>
+<rect x="24.2" y="158" width="10" height="6" rx="1.2" fill="#fbfaf6" stroke="#2a2a28" stroke-width=".5"/>
+<path d="M24.6 164 C23 172 24.5 181 28.5 183.5 C32.5 181 34.5 172 34 164Z" fill="url(#gSk)" stroke="#a88f7c" stroke-width=".5"/>
+<path d="M27 170 L27.4 178 M30 170 L30.4 179" stroke="#c8ad98" stroke-width=".5"/>
+<circle cx="26.4" cy="160.7" r=".7" fill="#c9c6bd"/>
+<!-- right arm (hand in pocket) -->
+<path d="M81 68 C89 68 92 72 93 80 C96 100 98 118 93 136 L83 152 L76 146 L85 132 C85.5 116 82 100 80 80Z" fill="url(#gA)" stroke="#050505" stroke-width=".9" stroke-linejoin="round"/>
+<path d="M77 147 L88 148" stroke="#050505" stroke-width=".8"/>
+<ellipse cx="80" cy="149.5" rx="3.4" ry="1.8" fill="url(#gSk)" stroke="#a88f7c" stroke-width=".4"/>
+<!-- ears / face -->
+<ellipse cx="43.4" cy="34" rx="2.6" ry="4.6" fill="#e6cdb8" stroke="#a88f7c" stroke-width=".4"/>
+<ellipse cx="76.6" cy="34" rx="2.6" ry="4.6" fill="#e6cdb8" stroke="#a88f7c" stroke-width=".4"/>
+<path d="M44 28 C44 12 76 12 76 28 L76 38 C76 50 68 57 60 57 C52 57 44 50 44 38Z" fill="url(#gSk)" stroke="#a88f7c" stroke-width=".5"/>
+<!-- hair -->
+<path d="M42.6 31 C39 11 55 3 68 6 C80 9 81 22 77.6 32 C77 24 73 19 66.5 17.4 C58 15.6 50 18 46.6 24.6 C45 27 44 29 42.6 31Z" fill="#1c1916"/>
+<path d="M50 12 C56 7 65 7 71 11 M46 18 C50 13 55 11 60 11.4" stroke="#463f37" stroke-width=".7" fill="none" stroke-linecap="round"/>
+<!-- beard -->
+<path d="M44 31 C43.5 46 47 54 60 59 C73 54 76.5 46 76 31 C74 40.5 71 43.4 66 44.4 C63 42.4 57 42.4 54 44.4 C49 43.4 46 40.5 44 31Z" fill="#1c1916"/>
+<path d="M50 50 C54 54 58 56 60 56.6 M70 50 C66 54 62 56 60 56.6" stroke="#3b342c" stroke-width=".6" fill="none" stroke-linecap="round"/>
+<path d="M52 45.4 C55 42.4 58 43.6 60 44.6 C62 43.6 65 42.4 68 45.4 C65 47.4 62.4 46.4 60 46.4 C57.6 46.4 55 47.4 52 45.4Z" fill="#1c1916"/>
+<path d="M55.4 49.6 Q60 51.8 64.6 49.6" stroke="#b47f70" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+<!-- eyes -->
+<ellipse cx="54" cy="30.6" rx="3.5" ry="1.9" fill="#fff"/><ellipse cx="66" cy="30.6" rx="3.5" ry="1.9" fill="#fff"/>
+<circle cx="54.3" cy="30.7" r="1.55" fill="#4a3222"/><circle cx="66.3" cy="30.7" r="1.55" fill="#4a3222"/>
+<circle cx="54.3" cy="30.7" r=".7" fill="#0d0a08"/><circle cx="66.3" cy="30.7" r=".7" fill="#0d0a08"/>
+<circle cx="54.9" cy="30.1" r=".4" fill="#fff"/><circle cx="66.9" cy="30.1" r=".4" fill="#fff"/>
+<path d="M50.2 30.4 Q54 27.2 57.8 30.2 M62.2 30.2 Q66 27.2 69.8 30.4" stroke="#1c1916" stroke-width="1" fill="none" stroke-linecap="round"/>
+<path d="M48.4 25.6 Q54 22 59.4 24.8 M60.6 24.8 Q66 22 71.6 25.6" stroke="#1c1916" stroke-width="2.1" fill="none" stroke-linecap="round"/>
+<path d="M60 30 Q57.6 37.4 61.6 39 M57.4 39.6 Q60 41.2 63 39.6" stroke="#c4a591" stroke-width=".8" fill="none" stroke-linecap="round"/>
+<path d="M47 36 Q48 41 52 43" stroke="#e0c3ab" stroke-width="1.6" fill="none" opacity=".5" stroke-linecap="round"/>
+</svg></div></div>
+    <div class="fig b" id="figB"><div class="fig-in"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 310">
+<defs>
+<pattern id="lace" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M5 1.4 q2.2 1.8 0 3.6 q-2.2 -1.8 0 -3.6 M1.4 7 q2 -1.8 3.6 0 q-2 1.8 -3.6 0 M7 7 q2 -1.8 3.6 0 q-2 1.8 -3.6 0" fill="none" stroke="#b9b3a5" stroke-width=".5"/></pattern>
+<linearGradient id="gS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#ece7dc"/></linearGradient>
+<linearGradient id="gV" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".82"/><stop offset="1" stop-color="#ffffff" stop-opacity=".35"/></linearGradient>
+<radialGradient id="bSk" cx=".45" cy=".4" r=".7"><stop offset="0" stop-color="#f7e8db"/><stop offset="1" stop-color="#ebd2bd"/></radialGradient>
+<linearGradient id="gH" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e8c996"/><stop offset="1" stop-color="#c99f66"/></linearGradient>
+</defs>
+<ellipse cx="60" cy="305" rx="50" ry="3.6" fill="#1a1917" opacity=".12"/>
+<!-- veil -->
+<path d="M44 22 C22 64 12 190 4 298 L30 300 C36 210 41 128 47 64Z" fill="url(#gV)" stroke="#bdb6a8" stroke-width=".7"/>
+<path d="M76 22 C98 64 108 190 116 298 L90 300 C84 210 79 128 73 64Z" fill="url(#gV)" stroke="#bdb6a8" stroke-width=".7"/>
+<path d="M12 262 C10 275 8 288 5 297 M108 262 C110 275 112 288 115 297" stroke="#cfc9bb" stroke-width=".5" fill="none" stroke-dasharray="1.2 1.6"/>
+<!-- tulle underskirt -->
+<path d="M41 126 C30 175 3 245 3 297 C40 306 80 306 117 297 C117 245 90 175 79 126Z" fill="#f3f0e8" stroke="#cfc9bb" stroke-width=".6"/>
+<!-- skirt -->
+<path d="M42 126 C33 172 8 240 6 299 Q10.5 305 15.0 299 Q19.5 305 24.0 299 Q28.5 305 33.0 299 Q37.5 305 42.0 299 Q46.5 305 51.0 299 Q55.5 305 60.0 299 Q64.5 305 69.0 299 Q73.5 305 78.0 299 Q82.5 305 87.0 299 Q91.5 305 96.0 299 Q100.5 305 105.0 299 Q109.5 305 114.0 299 C112 240 87 172 78 126Z" fill="url(#gS)" stroke="#6a655c" stroke-width=".9" stroke-linejoin="round"/>
+<path d="M42 126 C33 172 8 240 6 299 Q10.5 305 15.0 299 Q19.5 305 24.0 299 Q28.5 305 33.0 299 Q37.5 305 42.0 299 Q46.5 305 51.0 299 Q55.5 305 60.0 299 Q64.5 305 69.0 299 Q73.5 305 78.0 299 Q82.5 305 87.0 299 Q91.5 305 96.0 299 Q100.5 305 105.0 299 Q109.5 305 114.0 299 C112 240 87 172 78 126Z" fill="url(#lace)"/>
+<path d="M50 132 C46 190 30 250 22 304 M60 132 L60 306 M70 132 C74 190 90 250 98 304 M55 132 C55 200 45 260 41 306 M65 132 C65 200 75 260 79 306" stroke="#d7d1c3" stroke-width=".6" fill="none"/>
+<path d="M44 133 Q60 141 76 133" stroke="#d7d1c3" stroke-width=".7" fill="none"/>
+<!-- chest -->
+<path d="M36 76 C42 66 50 62 60 62 C70 62 78 66 84 76 L84 92 C76 86 68 90 60 98 C52 90 44 86 36 92Z" fill="url(#bSk)"/>
+<!-- bodice -->
+<path d="M38 88 C46 84 54 90 60 96.5 C66 90 74 84 82 88 C81 104 79 118 77.5 128 C68 132 52 132 42.5 128 C41 118 39 104 38 88Z" fill="url(#gS)" stroke="#6a655c" stroke-width=".9" stroke-linejoin="round"/>
+<path d="M38 88 C46 84 54 90 60 96.5 C66 90 74 84 82 88 C81 104 79 118 77.5 128 C68 132 52 132 42.5 128 C41 118 39 104 38 88Z" fill="url(#lace)"/>
+<path d="M50 100 L48.6 130 M60 100 L60 132 M70 100 L71.4 130" stroke="#d2ccbe" stroke-width=".7" fill="none"/>
+<path d="M39.5 90 C46 87 53 92 60 99 C67 92 74 87 80.5 90" stroke="#9a9488" stroke-width=".5" fill="none" stroke-dasharray="1 1.3"/>
+<!-- arms -->
+<path d="M27 92 C22 114 29 136 50 149 L55 141 C42 132 37 118 41 93Z" fill="url(#bSk)" stroke="#b39c8a" stroke-width=".5"/>
+<path d="M93 92 C98 114 91 136 70 149 L65 141 C78 132 83 118 79 93Z" fill="url(#bSk)" stroke="#b39c8a" stroke-width=".5"/>
+<path d="M33 104 q2 2 0 5 M35 113 q-2 2 0 5 M31 97 l3 1.5 M32 122 q2 1 1 4 M36 109 l2 1" stroke="#55524d" stroke-width=".55" fill="none" stroke-linecap="round"/>
+<!-- off-shoulder sleeves -->
+<path d="M26 82 C29 68 40 65 46 72 C46 78 45 84 44 91 C38 87 32 88 26 93Z" fill="url(#gS)" stroke="#6a655c" stroke-width=".8" stroke-linejoin="round"/>
+<path d="M94 82 C91 68 80 65 74 72 C74 78 75 84 76 91 C82 87 88 88 94 93Z" fill="url(#gS)" stroke="#6a655c" stroke-width=".8" stroke-linejoin="round"/>
+<path d="M28 84 C34 82 40 84 45 88 M92 84 C86 82 80 84 75 88" stroke="#cfc9bb" stroke-width=".6" fill="none"/>
+<!-- neck -->
+<path d="M54 50 L54 68 C57 72 63 72 66 68 L66 50Z" fill="#ecd6c3"/>
+<path d="M47 74 Q54 76.5 58 74 M62 74 Q66 76.5 73 74" stroke="#d5baa5" stroke-width=".6" fill="none"/>
+<!-- hair back / bun -->
+<circle cx="60" cy="10.5" r="10.5" fill="url(#gH)" stroke="#b8935a" stroke-width=".5"/>
+<path d="M52.5 8 Q60 1.5 67.5 8 M53 13.5 Q60 7.5 67 13.5 M56 4.6 Q60 8.4 64 4.6 M51.6 11 Q60 15 68.4 11" stroke="#b58c54" stroke-width=".6" fill="none"/>
+<path d="M42.6 38 C38 8 82 8 77.4 38 C76.6 27 70 21 60 21 C50 21 43.4 27 42.6 38Z" fill="url(#gH)" stroke="#b8935a" stroke-width=".5"/>
+<!-- face -->
+<path d="M45.4 32 C45.4 18 74.6 18 74.6 32 C74.6 47 68 56 60 56 C52 56 45.4 47 45.4 32Z" fill="url(#bSk)" stroke="#b39c8a" stroke-width=".5"/>
+<!-- front hair (soft side sweep) -->
+<path d="M45 36 C42.6 22 52 16.4 63 17.6 C55 20.4 50 26 49.6 42 C47.6 40 46 38 45 36Z" fill="url(#gH)"/>
+<path d="M75 36 C77.4 22 68 16.4 57 17.6 C65 20.4 70 26 70.4 42 C72.4 40 74 38 75 36Z" fill="url(#gH)"/>
+<path d="M47 26 C52 20 58 19 62 19 M73 26 C68 20 62 19 58 19 M46.5 33 C48 27 51 23 55 21" stroke="#b8935a" stroke-width=".55" fill="none" stroke-linecap="round"/>
+<path d="M44.4 38 C40.6 48 42 57 47 61 C45 52 46 46 47 40Z" fill="url(#gH)" stroke="#b8935a" stroke-width=".4"/>
+<path d="M75.6 38 C79.4 48 78 57 73 61 C75 52 74 46 73 40Z" fill="url(#gH)" stroke="#b8935a" stroke-width=".4"/>
+<!-- tiara -->
+<path d="M45 22 Q60 13 75 22" stroke="#9a9a9a" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+<path d="M47 20.6 L49 14 L51.2 19.2Z M52 18.6 L54.2 10.6 L57 16.8Z M56.8 16.8 L60 7 L63.2 16.8Z M63 16.8 L65.8 10.6 L68 18.6Z M68.8 19.2 L71 14 L73 20.6Z" fill="#fbfbfb" stroke="#9a9a9a" stroke-width=".55" stroke-linejoin="round"/>
+<circle cx="49" cy="13" r="1" fill="#fff" stroke="#9a9a9a" stroke-width=".4"/><circle cx="54.2" cy="9.8" r="1.1" fill="#fff" stroke="#9a9a9a" stroke-width=".4"/><circle cx="60" cy="6.2" r="1.4" fill="#fff" stroke="#9a9a9a" stroke-width=".4"/><circle cx="65.8" cy="9.8" r="1.1" fill="#fff" stroke="#9a9a9a" stroke-width=".4"/><circle cx="71" cy="13" r="1" fill="#fff" stroke="#9a9a9a" stroke-width=".4"/>
+<!-- face details -->
+<path d="M50.4 36 Q54 32.6 57.8 35.6 M62.2 35.6 Q66 32.6 69.6 36" stroke="#3f3025" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+<ellipse cx="54.2" cy="36.4" rx="2.9" ry="1.5" fill="#fff"/><ellipse cx="65.8" cy="36.4" rx="2.9" ry="1.5" fill="#fff"/>
+<circle cx="54.4" cy="36.5" r="1.4" fill="#6d5a45"/><circle cx="65.6" cy="36.5" r="1.4" fill="#6d5a45"/>
+<circle cx="54.4" cy="36.5" r=".65" fill="#1a1410"/><circle cx="65.6" cy="36.5" r=".65" fill="#1a1410"/>
+<path d="M50 34.8 l-1.4 -1 M51.4 33.6 l-.9 -1.3 M69.6 34.8 l1.4 -1 M68.6 33.6 l.9 -1.3" stroke="#3f3025" stroke-width=".55" fill="none" stroke-linecap="round"/>
+<path d="M49 30.6 Q54 27.6 58.6 30 M61.4 30 Q66 27.6 71 30.6" stroke="#b08a5c" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+<path d="M60 36 Q58.6 42 61 43" stroke="#dcc3ae" stroke-width=".75" fill="none" stroke-linecap="round"/>
+<path d="M55.4 48.4 Q57.8 46.6 60 47.8 Q62.2 46.6 64.6 48.4 Q60 53 55.4 48.4Z" fill="#d78f97"/>
+<path d="M56.6 48.8 Q60 50 63.4 48.8" stroke="#f3c2c6" stroke-width=".5" fill="none"/>
+<circle cx="49.6" cy="43.4" r="4" fill="#f2b8b0" opacity=".32"/><circle cx="70.4" cy="43.4" r="4" fill="#f2b8b0" opacity=".32"/>
+<path d="M45.2 45 v3" stroke="#a5a5a5" stroke-width=".5"/><circle cx="45.2" cy="50.6" r="2" fill="#fff" stroke="#9a9a9a" stroke-width=".5"/>
+<path d="M74.8 45 v3" stroke="#a5a5a5" stroke-width=".5"/><circle cx="74.8" cy="50.6" r="2" fill="#fff" stroke="#9a9a9a" stroke-width=".5"/>
+<!-- bouquet -->
+<path d="M58 160 L54 178 L60 173 L66 178 L62 160Z" fill="#f4f1ea" stroke="#9a958a" stroke-width=".5"/>
+<path d="M60 158 L60 170" stroke="#8fa084" stroke-width="1.3"/>
+<path d="M49 154 q-11 -3 -13 5 q9 4 13 -5z M71 154 q11 -3 13 5 q-9 4 -13 -5z M52 160 q-8 3 -8 10 q8 -1 8 -10z M68 160 q8 3 8 10 q-8 -1 -8 -10z" fill="#c1cdb7" stroke="#7d8a74" stroke-width=".5"/>
+<g fill="#fff" stroke="#5a564e" stroke-width=".8" stroke-linecap="round">
+<g transform="translate(50 148)"><circle r="8.4"/><path d="M-3 0 a3 3 0 1 1 3 3 a5 5 0 0 1 -5 -5 a7 7 0 0 1 8 -1 a9 9 0 0 1 -9 8" fill="none"/></g>
+<g transform="translate(70 148)"><circle r="8.4"/><path d="M-3 0 a3 3 0 1 1 3 3 a5 5 0 0 1 -5 -5 a7 7 0 0 1 8 -1 a9 9 0 0 1 -9 8" fill="none"/></g>
+<g transform="translate(60 140.5)"><circle r="9"/><path d="M-3 0 a3 3 0 1 1 3 3 a5 5 0 0 1 -5 -5 a7 7 0 0 1 8 -1 a9 9 0 0 1 -9 8" fill="none"/></g>
+<g transform="translate(59 154.5)"><circle r="8"/><path d="M-3 0 a3 3 0 1 1 3 3 a5 5 0 0 1 -5 -5 a7 7 0 0 1 8 -1" fill="none"/></g>
+<g transform="translate(67.5 157)"><circle r="6"/><path d="M-2 0 a2 2 0 1 1 2 2 a4 4 0 0 1 -4 -4 a5 5 0 0 1 6 -1" fill="none"/></g>
+</g>
+<ellipse cx="45.6" cy="149.6" rx="3.6" ry="2.4" fill="url(#bSk)" stroke="#b39c8a" stroke-width=".4"/>
+<ellipse cx="74.4" cy="149.6" rx="3.6" ry="2.4" fill="url(#bSk)" stroke="#b39c8a" stroke-width=".4"/>
+</svg></div></div>
+    <svg class="heart" id="heart" viewBox="0 0 24 24"><path class="h" pathLength="1" d="M12 21 C4 14 1 10 1 6.5 C1 3.5 3.3 1.5 6 1.5 C8.5 1.5 10.6 3 12 5.3 C13.4 3 15.5 1.5 18 1.5 C20.7 1.5 23 3.5 23 6.5 C23 10 20 14 12 21Z"/></svg>
+    <svg class="spark s1" viewBox="-6 -6 12 12"><path d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg>
+    <svg class="spark s2" viewBox="-6 -6 12 12"><path d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg>
+    <svg class="spark s3" viewBox="-6 -6 12 12"><path d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg>
+  </div>
+</div>
+
+<script>
+(function(){
+'use strict';
+var C = window.INVITE;
+var $ = function(s){return document.querySelector(s)};
+var clamp=function(x,a,b){a=a==null?0:a;b=b==null?1:b;return Math.min(b,Math.max(a,x))};
+var lerp=function(a,b,t){return a+(b-a)*t};
+var sm=function(t){return t*t*(3-2*t)};
+var seg=function(x,a,b){return clamp((x-a)/(b-a))};
+var esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
+var nl=function(s){return esc(s).replace(/\n/g,'<br>')};
+var toFa=function(s){return String(s).replace(/\d/g,function(d){return '۰۱۲۳۴۵۶۷۸۹'[d]})};
+var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var safeUrl=function(u){u=String(u||'').trim();return /^(https?:|tel:|mailto:|sms:)/i.test(u)?u:''};
+
+/* ───── names / basic text ───── */
+var first = C.firstName==='bride' ? [C.bride,C.groom] : [C.groom,C.bride];
+$('#seal').textContent = C.seal||'';
+$('#envLabel').textContent = first[0]+' و '+first[1];
+$('#cardNames').textContent = first[0]+' و '+first[1];
+$('#cardDate').textContent = C.dateParts.day+' '+C.dateParts.month+' '+C.dateParts.year;
+$('#latin').textContent = C.latinTitle||'';
+if(!C.latinTitle) $('#latin').style.display='none';
+$('#names').innerHTML = '<span>'+esc(first[0])+'</span><span class="amp">و</span><span>'+esc(first[1])+'</span>';
+$('#heroDate').textContent = C.dateParts.weekday+' '+C.dateParts.day+' '+C.dateParts.month+' '+C.dateParts.year;
+$('#heroLine').textContent = C.heroLine||'';
+
+var qs=new URLSearchParams(location.search), guestName=(qs.get('to')||'').trim();
+if(guestName){ $('#guest').innerHTML='دعوت‌نامه‌ی ویژه‌ی<b></b>'; $('#guest').querySelector('b').textContent=guestName; }
+
+/* ───── hand-drawn rose garland ───── */
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function f(n){return Math.round(n*10)/10}
+function rose(cx,cy,r,rand){
+  var n=8,pts=[],i;
+  for(i=0;i<n;i++){var a=i/n*Math.PI*2+rand()*.35,rr=r*(.86+rand()*.24);pts.push([cx+Math.cos(a)*rr,cy+Math.sin(a)*rr*.94])}
+  var mid=function(p,q){return f((p[0]+q[0])/2)+' '+f((p[1]+q[1])/2)};
+  var d='M'+mid(pts[n-1],pts[0]);
+  for(i=0;i<n;i++)d+=' Q'+f(pts[i][0])+' '+f(pts[i][1])+' '+mid(pts[i],pts[(i+1)%n]);
+  d+='Z';
+  var sp='',steps=30,turns=2.3,rot=rand()*6.28;
+  for(i=0;i<=steps;i++){var t=i/steps,ang=t*turns*Math.PI*2+rot,rad=r*(.06+.78*t)*(1+(rand()-.5)*.16);
+    sp+=(i?'L':'M')+f(cx+Math.cos(ang)*rad)+' '+f(cy+Math.sin(ang)*rad*.94)}
+  var pet='M'+f(cx-r*.5)+' '+f(cy+r*.1)+' Q'+f(cx)+' '+f(cy+r*.75)+' '+f(cx+r*.55)+' '+f(cy+r*.05);
+  return '<path d="'+d+'" fill="#f5f1e8"/><path d="'+sp+'" fill="none"/><path d="'+pet+'" fill="none"/>';
+}
+function leaf(x,y,a,s){return '<path transform="translate('+f(x)+' '+f(y)+') rotate('+f(a)+') scale('+s+')" d="M0 0 Q5 -4 11 0 Q5 4 0 0Z" fill="#f5f1e8"/>'}
+function bez(p0,p1,p2,p3,t){var u=1-t;return u*u*u*p0+3*u*u*t*p1+3*u*t*t*p2+t*t*t*p3}
+function garland(seed,W,Hh,maxLen){
+  var rand=rng(seed),stems='',leaves='',roses='',i,j;
+  var xs=[];for(var x=24;x<W;x+=W/9.2)xs.push(x+(rand()-.5)*14);
+  xs.forEach(function(x0){
+    var L=(38+rand()*(maxLen-38)),y0=26,sw=(rand()-.5)*22;
+    var p=[[x0,y0],[x0+sw,y0+L/3],[x0-sw,y0+2*L/3],[x0+sw/2,y0+L]];
+    stems+='<path d="M'+f(p[0][0])+' '+f(p[0][1])+' C'+f(p[1][0])+' '+f(p[1][1])+' '+f(p[2][0])+' '+f(p[2][1])+' '+f(p[3][0])+' '+f(p[3][1])+'" fill="none"/>';
+    var k=Math.max(1,Math.round(L/34));
+    for(j=1;j<=k;j++){var t=j/k,px=bez(p[0][0],p[1][0],p[2][0],p[3][0],t),py=bez(p[0][1],p[1][1],p[2][1],p[3][1],t);
+      var r=13-t*5+rand()*2.5;roses+=rose(px,py,r,rand);
+      if(j<k){leaves+=leaf(px,py+r*.6,30+rand()*40,.9)+leaf(px,py+r*.6,150-rand()*40,.9)}}
+    for(j=0;j<3;j++){var tt=(j+.5)/3.4;leaves+=leaf(bez(p[0][0],p[1][0],p[2][0],p[3][0],tt),bez(p[0][1],p[1][1],p[2][1],p[3][1],tt),(j%2?20:160)+rand()*30,.8)}
+  });
+  var top='';
+  for(var row=0;row<2;row++){for(var xx=-6+row*14;xx<W+10;xx+=26){
+    top+=rose(xx+(rand()-.5)*6,10+row*15+8*Math.sin(xx/38)+rand()*6,15+rand()*8,rand);
+    if(rand()>.55)leaves+=leaf(xx,26+row*10,rand()*360,1)}}
+  return '<svg class="__CLS__" viewBox="0 0 '+W+' '+Hh+'" aria-hidden="true" preserveAspectRatio="xMidYMin meet">'+stems+leaves+roses+top+'</svg>';
+}
+$('#garlandTop').outerHTML = garland(7,400,158,120).replace('__CLS__','garland');
+
+/* ───── story scenes ───── */
+var sprig='<svg class="sprig" viewBox="0 0 120 28" aria-hidden="true"><path d="M4 14 H48 M72 14 H116"/><path d="M60 25 V7"/><path d="M60 19 C52 19 48 14 48 10 C54 10 59 13 60 19Z"/><path d="M60 14 C68 14 72 9 72 5 C66 5 61 8 60 14Z"/></svg>';
+var corner='<svg class="corner __P__" viewBox="0 0 38 38" aria-hidden="true"><path d="M1 30 C1 12 12 1 30 1"/><path d="M7 30 C7 17 17 7 30 7"/><path d="M13 13 q4 -1 5 -5 q-4 -1 -5 5z"/></svg>';
+function btn(b,cls){var u=safeUrl(b.url);return u?'<a class="btn '+(cls||'')+'" href="'+esc(u)+'" target="_blank" rel="noopener">'+esc(b.label)+'</a>':''}
+
+var html='';
+html+='<section class="scene" id="s-msg"><div class="reveal">'+
+  '<div class="frame">'+['tl','tr','bl','br'].map(function(p){return corner.replace('__P__',p)}).join('')+
+  '<p class="msg">'+nl(C.message)+'</p>'+(C.messageSign?'<p class="sign">'+esc(C.messageSign)+'</p>':'')+'</div></div></section>';
+
+var dp=C.dateParts;
+var calUrl=(function(){
+  var s=new Date(C.dateISO); if(isNaN(s))return '';
+  var e=new Date(s.getTime()+(C.durationHours||4)*3600e3);
+  var fm=function(d){return d.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'')};
+  return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent('جشن ازدواج '+first[0]+' و '+first[1])+
+    '&dates='+fm(s)+'/'+fm(e)+'&location='+encodeURIComponent((C.venue.name||'')+' '+(C.venue.address||'').replace(/\n/g,' '));
+})();
+html+='<section class="scene" id="s-date"><div class="reveal">'+sprig+
+  '<p class="wd">'+esc(dp.weekday)+'</p><p class="day">'+esc(dp.day)+'</p><p class="mon">'+esc(dp.month)+'</p><p class="yr">'+esc(dp.year)+'</p>'+
+  '<p class="tm">'+esc(dp.time)+'</p>'+
+  '<div class="cd" id="cd" role="timer" aria-live="off"></div><p class="cd-note" id="cdNote">تا شروع جشن</p>'+
+  (calUrl?'<div class="btns"><a class="btn" href="'+esc(calUrl)+'" target="_blank" rel="noopener">افزودن به تقویم</a></div>':'')+
+  '</div></section>';
+
+if(C.schedule&&C.schedule.length){
+  html+='<section class="scene" id="s-plan"><div class="reveal">'+sprig+'<h2 class="h2">'+esc(C.scheduleTitle||'برنامه')+'</h2><ol class="tl">'+
+  C.schedule.map(function(it){return '<li><span class="t">'+esc(it.time)+'</span><span class="dot"></span><span class="d">'+esc(it.title)+'</span></li>'}).join('')+'</ol></div></section>';
+}
+
+var V=C.venue||{};
+html+='<section class="scene" id="s-place"><div class="reveal">'+
+  '<svg class="pin" viewBox="0 0 48 60" aria-hidden="true"><ellipse class="r" cx="24" cy="57" rx="14" ry="4"/><ellipse class="r" cx="24" cy="57" rx="14" ry="4"/><path class="p" d="M24 55 C24 55 6 37 6 23 A18 18 0 0 1 42 23 C42 37 24 55 24 55Z"/><circle class="p" cx="24" cy="23" r="6"/></svg>'+
+  '<h2 class="venue">'+esc(V.name)+'</h2><p class="addr">'+nl(V.address)+'</p>'+
+  '<div class="btns">'+(V.mapLinks||[]).map(function(b,i){return btn(b,i===0?'solid':'')}).join('')+'</div></div></section>';
+
+var cbtns=(C.contacts||[]).map(function(b){return btn(b,'')}).join('');
+if(cbtns){
+  html+='<section class="scene" id="s-rsvp"><div class="reveal">'+sprig+'<h2 class="h2">'+esc(C.contactTitle||'')+'</h2><div class="btns" style="margin-top:22px">'+cbtns+'</div></div></section>';
+}
+
+html+='<section class="scene last" id="s-end"><div class="reveal">'+
+  garland(21,400,124,84).replace('__CLS__','finale-garland')+
+  '<p class="closing">'+esc(C.closing||'')+'</p><p class="names2">'+esc(first[0])+' و '+esc(first[1])+'</p></div></section>';
+$('#story').innerHTML=html;
+
+/* reveal */
+var revs=document.querySelectorAll('.reveal');
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.18});
+  revs.forEach(function(r){io.observe(r)});
+}else revs.forEach(function(r){r.classList.add('in')});
+
+/* ───── countdown ───── */
+var target=new Date(C.dateISO).getTime();
+function tick(){
+  var box=$('#cd'); if(!box||isNaN(target))return;
+  var d=target-Date.now();
+  if(d<=0){box.style.display='none';$('#cdNote').textContent='روز جشن رسیده است';return}
+  var s=Math.floor(d/1000),D=Math.floor(s/86400),H=Math.floor(s%86400/3600),M=Math.floor(s%3600/60),S=s%60;
+  var u=function(n,l){return '<div><b>'+toFa(n)+'</b><small>'+l+'</small></div>'};
+  box.innerHTML=u(D,'روز')+u(H,'ساعت')+u(M,'دقیقه')+u(S,'ثانیه');
+}
+tick();setInterval(tick,1000);
+
+/* ───── custom avatars ───── */
+[['groom','#figG'],['bride','#figB']].forEach(function(p){
+  var src=safeUrl(C.avatars&&C.avatars[p[0]])||((C.avatars&&/^data:image\//.test(C.avatars[p[0]]||''))?C.avatars[p[0]]:'');
+  if(src){var host=$(p[1]+' .fig-in');host.innerHTML='';var im=new Image();im.src=src;im.alt='';host.appendChild(im)}
+});
+
+/* ───── music ───── */
+var Music=(function(){
+  var playing=false,ctx,master,timer,nextT=0,bar=0,audioEl=null,vol=(C.music&&C.music.volume)||.5;
+  var mf=function(m){return 440*Math.pow(2,(m-69)/12)};
+  var chords=[
+    {b:36,n:[60,64,67,71,76,72]},
+    {b:33,n:[57,60,64,67,72,69]},
+    {b:41,n:[57,60,65,69,72,76]},
+    {b:43,n:[59,62,67,71,74,79]}
+  ];
+  var pat=[0,2,1,3,2,4,3,1, 0,3,2,4,1,3,5,2];
+  function build(){
+    var AC=window.AudioContext||window.webkitAudioContext; if(!AC)return false;
+    ctx=new AC();
+    master=ctx.createGain();master.gain.value=0;
+    var dry=ctx.createGain();dry.gain.value=.75;
+    var wet=ctx.createGain();wet.gain.value=.55;
+    var conv=ctx.createConvolver();
+    var len=Math.floor(ctx.sampleRate*3.4),ir=ctx.createBuffer(2,len,ctx.sampleRate);
+    for(var c=0;c<2;c++){var dta=ir.getChannelData(c);for(var i=0;i<len;i++)dta[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.7)}
+    conv.buffer=ir;
+    var lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=3800;
+    master.connect(lp);lp.connect(dry);dry.connect(ctx.destination);lp.connect(conv);conv.connect(wet);wet.connect(ctx.destination);
+    return true;
+  }
+  function note(m,t,dur,v,type){
+    var o1=ctx.createOscillator(),o2=ctx.createOscillator(),g=ctx.createGain(),g2=ctx.createGain();
+    o1.type=type||'sine';o2.type='triangle';
+    o1.frequency.value=mf(m);o2.frequency.value=mf(m)*2;
+    g2.gain.value=.16;
+    g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(v,t+.012);g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+    o1.connect(g);o2.connect(g2);g2.connect(g);g.connect(master);
+    o1.start(t);o2.start(t);o1.stop(t+dur+.05);o2.stop(t+dur+.05);
+  }
+  function schedule(){
+    var step=.56;
+    while(nextT<ctx.currentTime+1.4){
+      var ch=chords[Math.floor(bar/8)%chords.length],k=bar%8,pi=(Math.floor(bar/8)%2)*8+k;
+      if(k===0)note(ch.b,nextT,4.4,.17);
+      if(k===0)note(ch.b+12,nextT,3.2,.07);
+      var idx=pat[pi]%ch.n.length;
+      if(Math.random()>.12)note(ch.n[idx],nextT,2.6,.06+Math.random()*.035);
+      if(k===4&&Math.random()>.45)note(ch.n[(idx+2)%ch.n.length]+12,nextT+step*.5,2.2,.03);
+      nextT+=step;bar++;
+    }
+  }
+  function fade(to,sec){
+    if(audioEl){audioEl.volume=to; return}
+    var t=ctx.currentTime;master.gain.cancelScheduledValues(t);master.gain.setValueAtTime(master.gain.value,t);master.gain.linearRampToValueAtTime(to,t+sec);
+  }
+  function ui(){var b=$('#music');b.setAttribute('aria-pressed',playing?'true':'false')}
+  return {
+    get playing(){return playing},
+    start:function(){
+      if(playing)return;
+      var src=safeUrl(C.music&&C.music.src)||((C.music&&/^data:audio\//.test(C.music.src||''))?C.music.src:'');
+      if(src){
+        if(!audioEl){audioEl=new Audio(src);audioEl.loop=true;audioEl.volume=vol}
+        var pr=audioEl.play();if(pr&&pr.catch)pr.catch(function(){playing=false;ui()});
+        playing=true;ui();return;
+      }
+      if(!ctx&&!build())return;
+      if(ctx.resume)ctx.resume();
+      if(!timer){nextT=ctx.currentTime+.1;schedule();timer=setInterval(schedule,250)}
+      fade(vol,2.2);playing=true;ui();
+    },
+    stop:function(){
+      if(!playing)return;
+      if(audioEl){audioEl.pause()}
+      else{fade(0,.6);setTimeout(function(){if(!playing&&ctx&&ctx.suspend)ctx.suspend()},750)}
+      playing=false;ui();
+    }
+  };
+})();
+var musicTouched=false;
+$('#music').addEventListener('click',function(e){e.stopPropagation();musicTouched=true;this.classList.remove('attn');Music.playing?Music.stop():Music.start()});
+document.addEventListener('visibilitychange',function(){if(document.hidden&&Music.playing){Music.stop();Music._resume=true}else if(!document.hidden&&Music._resume){Music._resume=false;Music.start()}});
+
+/* ───── scroll choreography ───── */
+var intro=$('#intro'),flap=$('#flap'),card=$('#card'),cardIn=$('#cardIn'),envBack=$('#envBack'),envFront=$('#envFront'),
+    hero=$('#hero'),hint=$('#hint'),guest=$('#guest'),paperfade=$('#paperfade'),walk=$('#walk'),
+    figG=$('#figG'),figB=$('#figB'),track=$('#track'),heart=$('#heart'),sparks=document.querySelectorAll('.spark');
+var flapParts=[flap.querySelector('.flap-f'),flap.querySelector('.flap-b'),$('#seal')];
+var vw,vh,H,cardH,introTop,total,storyStart,storyEnd,trackW,fw;
+function layout(){
+  vw=window.innerWidth;vh=window.innerHeight;
+  H=envBack.offsetHeight;cardH=card.offsetHeight;
+  introTop=intro.getBoundingClientRect().top+window.scrollY;
+  total=intro.offsetHeight-vh;
+  storyStart=introTop+total;
+  storyEnd=Math.max(storyStart+1,document.documentElement.scrollHeight-vh);
+  trackW=track.clientWidth;fw=figG.offsetWidth;
+}
+var raf=0,walkT=0,lastM=0;
+function update(){
+  raf=0;
+  var y=window.scrollY;
+  var p=clamp((y-introTop)/total);
+  var a=sm(seg(p,.03,.26)), b=sm(seg(p,.22,.50)), c=sm(seg(p,.50,.82)), h=sm(seg(p,.74,.92));
+
+  flap.style.transform='perspective(1100px) rotateX('+(-180*a)+'deg)';
+  flap.style.zIndex=a>.5?1:4;
+  var fo=1-seg(c,.05,.55);flapParts.forEach(function(e){e.style.opacity=fo});
+
+  var y0=.42*H-cardH/2, rise=.6*cardH;
+  var cyRise=y0-rise*b;
+  var yy=lerp(cyRise,0,c);
+  card.style.transform='translate3d(0,'+yy.toFixed(1)+'px,0) scale('+lerp(1,1.35,c).toFixed(3)+')';
+  card.style.opacity=1-seg(c,.6,1);
+  cardIn.style.opacity=1-seg(c,.15,.6);
+
+  var envO=1-seg(c,0,.5), envY=(c*vh*.22).toFixed(1)+'px';
+  envBack.style.opacity=envO;envBack.style.transform='translateY('+envY+')';
+  envFront.style.opacity=envO;envFront.style.transform='translateY('+envY+')';
+  flap.style.marginTop=envY;
+
+  paperfade.style.opacity=sm(seg(p,.55,.86));
+  hero.style.opacity=h;hero.style.transform='translateY('+((1-h)*18).toFixed(1)+'px)';
+  hint.style.opacity=1-seg(p,.0,.08);hint.style.pointerEvents=p>.1?'none':'auto';
+  guest.style.opacity=1-seg(p,0,.08);
+
+  /* couple */
+  var s=clamp((y-storyStart)/(storyEnd-storyStart));
+  var showWalk=seg(p,.96,1);
+  walk.style.opacity=showWalk;
+  var m=sm(clamp(s/.9));
+  var gx=lerp(10,trackW/2-fw,m), bx=lerp(trackW-fw-10,trackW/2,m);
+  figG.style.transform='translate3d('+gx.toFixed(1)+'px,0,0)';
+  figB.style.transform='translate3d('+bx.toFixed(1)+'px,0,0)';
+  if(!reduce && Math.abs(m-lastM)>.0004 && m>0 && m<.999){
+    walk.classList.add('is-walking');clearTimeout(walkT);walkT=setTimeout(function(){walk.classList.remove('is-walking')},170);
+  }
+  lastM=m;
+  var tog=m>=.999;
+  walk.classList.toggle('together',tog);
+  var hp=seg(m,.985,1);
+  heart.style.opacity=tog?1:0;
+  heart.querySelector('.h').style.strokeDashoffset=tog?0:1;
+  heart.querySelector('.h').style.transition=tog?'stroke-dashoffset 1.4s ease .1s':'none';
+  sparks.forEach(function(sp){sp.style.opacity=tog?'':0});
+}
+function onScroll(){if(!raf)raf=requestAnimationFrame(update)}
+window.addEventListener('scroll',onScroll,{passive:true});
+window.addEventListener('resize',function(){layout();update()});
+window.addEventListener('load',function(){layout();update()});
+layout();update();
+
+/* tap to open (also starts the music: browsers need a tap for audio) */
+var animating=false,animId=0;
+function scrollToY(target,dur){
+  if(reduce){window.scrollTo(0,target);return}
+  var start=window.scrollY,t0=performance.now();animating=true;
+  function step(now){
+    if(!animating)return;
+    var t=clamp((now-t0)/dur);window.scrollTo(0,start+(target-start)*sm(t));
+    if(t<1)animId=requestAnimationFrame(step);else animating=false;
+  }
+  animId=requestAnimationFrame(step);
+}
+['wheel','touchstart','keydown'].forEach(function(ev){window.addEventListener(ev,function(){animating=false},{passive:true})});
+$('#stage').addEventListener('click',function(){
+  var p=clamp((window.scrollY-introTop)/total);
+  if(!musicTouched&&!Music.playing){musicTouched=true;$('#music').classList.remove('attn');Music.start()}
+  if(p<.12)scrollToY(introTop+total*.97,3200);
+});
+})();
+</script>
+</body>
+</html>
